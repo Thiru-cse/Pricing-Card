@@ -1,78 +1,140 @@
-import './App.css';
-const dataFree={
-   "head":["FREE","0"],
-   "body":{
-     "check":["Single User","5GB Storage","Unlimited Public Projects","Community Access"],
-     "cross":["Unlimited Private Projects","Dedicated Phone Support","Free Subdomain","Monthly Status Reports"]
-   }
-  };
-  const dataPlus={
-    "head":["PLUS","9"],
-    "body":{
-      "check":["5 Users","50GB Storage","Unlimited Public Projects","Community Access","Unlimited Private Projects","Dedicated Phone Support","Free Subdomain"],
-      "cross":["Monthly Status Reports"]
-    }
-   };
-   const dataPro={
-     "head":["PRO","49"],
-     "body":{
-       "check":["Unlimited Users","150GB Storage","Unlimited Public Projects","Community Access","Unlimited Private Projects","Dedicated Phone Support","Unlimited Free Subdomain","Monthly Status Reports"],
-       "cross":[]
-     }
-    };
+import PriceCard from "./pcard";
+import "./App.css";
+
 function App() {
+  const pricingData = [
+    {
+      packageName: "FREE",
+      price: "$0",
+      period: "month",
+      features: [
+        {
+          name: "Single User",
+          isEnabled: true,
+        },
+        {
+          name: "5GB Storage",
+          isEnabled: true,
+        },
+        {
+          name: "Unlimited Public Projects",
+          isEnabled: true,
+        },
+        {
+          name: "Community Access",
+          isEnabled: true,
+        },
+        {
+          name: "Unlimited Private Projects",
+          isEnabled: false,
+        },
+        {
+          name: "Dedicated Phone Support",
+          isEnabled: false,
+        },
+        {
+          name: "Free Subdomain",
+          isEnabled: false,
+        },
+        {
+          name: "Monthly Status Reports",
+          isEnabled: false,
+        },
+      ],
+    },
+    {
+      packageName: "PLUS",
+      price: "$9",
+      period: "month",
+      features: [
+        {
+          name: "5 Users",
+          isEnabled: true,
+          isBold: true,
+        },
+        {
+          name: "50GB Storage",
+          isEnabled: true,
+        },
+        {
+          name: "Unlimited Public Projects",
+          isEnabled: true,
+        },
+        {
+          name: "Community Access",
+          isEnabled: true,
+        },
+        {
+          name: "Unlimited Private Projects",
+          isEnabled: true,
+        },
+        {
+          name: "Dedicated Phone Support",
+          isEnabled: true,
+        },
+        {
+          name: "Free Subdomain",
+          isEnabled: true,
+        },
+        {
+          name: "Monthly Status Reports",
+          isEnabled: false,
+        },
+      ],
+    },
+    {
+      packageName: "PRO",
+      price: "$49",
+      period: "month",
+      features: [
+        {
+          name: "Unlimited Users",
+          isEnabled: true,
+          isBold: true,
+        },
+        {
+          name: "150GB Storage",
+          isEnabled: true,
+        },
+        {
+          name: "Unlimited Public Projects",
+          isEnabled: true,
+        },
+        {
+          name: "Community Access",
+          isEnabled: true,
+        },
+        {
+          name: "Unlimited Private Projects",
+          isEnabled: true,
+        },
+        {
+          name: "Dedicated Phone Support",
+          isEnabled: true,
+        },
+        {
+          name: "Free Subdomain",
+          isEnabled: true,
+          isunlimited: true,
+        },
+        {
+          name: "Monthly Status Reports",
+          isEnabled: true,
+        },
+      ],
+    },
+  ];
   return (
-      <section className="pricing py-5">
+    <section className="pricing py-5">
       <div className="container">
-      <div className="row">
-      <CardComp data={dataFree}/>
-      <CardComp data={dataPlus}/>
-      <CardComp data={dataPro}/>
+        <div className="row">
+          {pricingData.map((obj, index) => {
+            return <PriceCard key={`C${index}`} Data={obj} />;
+          })}
+        </div>
       </div>
-      </div>
-      </section>
+    </section>
   );
 }
-function CardComp({data}) {
-  return (
-    <div className="col-lg-4">
-    <div className="card mb-5 mb-lg-0">
-      <div className="card-body">
-        <HeaderComp headdata={data.head}/>
-        <CardBodyComp bodydata={data.body}/>
-        <ButtonComp/>
-      </div>
-      </div>
-      </div>
-  );
-
-}
-function HeaderComp({headdata}) {
-  return (
-    <>
-      <h5 className="card-title text-muted text-uppercase text-center">{headdata[0]}</h5>
-      <h6 className="card-price text-center">${headdata[1]}<span className="period">/month</span></h6>
-      <hr></hr>
-    </>
-  );
-
-}
-function CardBodyComp({bodydata}) {
-  return (
-    <ul class="fa-ul">
-      {
-        bodydata.check.map((check)=><li><span className="fa-li"><i className="fas fa-check"></i></span>{check}</li>)}
-      {  bodydata.cross.map((cross)=><li className="text-muted"><span className="fa-li"><i className="fas fa-times"></i></span>{cross}</li>)}
-    </ul>
-  );
-
-}
-function ButtonComp() {
-  return (
-    <div className="d-grid">
-    <a href="#" className="btn btn-primary text-uppercase">Button</a>
-  </div>
-  );}
-
 
 export default App;
